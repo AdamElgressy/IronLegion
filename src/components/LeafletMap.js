@@ -7,56 +7,46 @@ import localforage from 'localforage';
 import 'leaflet-offline';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 
-//Static data for list of markers
-const markerList = [
+//data for list of markers
+let markerList = [
   {
     lat: 17.441013,
     lng: 78.391796,
-    name: "ABC Hospitals",
+    name: "Mark I",
     info: 10
   },
   {
     lat: 17.442889,
     lng: 78.396873,
-    name: "XYZ Hospitals",
+    name: "Mark II",
     info: 20
   },
   {
     lat: 17.441681,
     lng: 78.394357,
-    name: "NRI Hospitals",
-    info: 10
+    name: "Mark III",
+    info: 30
   },
   {
     lat:17.441597,
     lng: 78.356214,
-    name:"sandya Hospitals"
+    name:"Mark IV",
+    info: 40
   },
   {
     lat:17.441264, 
     lng:78.360184,
-    name:"childrens Hospitals"
+    name:"Mark V",
+    info: 50
   }
 ];
 
-//Defining the geo search control 
-const searchControl = new GeoSearchControl({ //geosearch object
-  provider: new OpenStreetMapProvider(),
-  // style: 'button',
-  showMarker: true,
-  autoComplete: true,   
-  showPopup: false,
-  autoClose: true,
-  retainZoomLevel: false,
-  animateZoom: true,
-  // keepResult: false,
-  searchLabel: 'search'
-});
+
 
 //Defining the custom marker with an hospital building icon
 const customMarker = new L.icon({
-  iconUrl: require('../assets/hostpital-building.svg'),
-  iconSize: new L.Point(35, 46),
+  iconUrl: require('../assets/iron-man-png.png'),
+  iconSize: new L.Point(50, 70),
   // iconAnchor:   [22, 94],
 });
 
@@ -84,7 +74,6 @@ class LeafletMap extends React.Component {
 });
     offlineLayer.addTo(map);//add the offline layer
     map.zoomControl.remove();
-    map.addControl(searchControl);
   }
 
   //Defining the custom icon for clusters
@@ -108,7 +97,11 @@ class LeafletMap extends React.Component {
         <p>
           <strong>{markerList[index].name}</strong>
           <br />
-          Available beds:{markerList[index].info}
+          Location:{markerList[index].info}
+          <br />
+          Speed:{markerList[index].info}
+          <br />
+          Mission:{markerList[index].info}
         </p>
       </Popup>
     );
@@ -121,7 +114,7 @@ class LeafletMap extends React.Component {
     
     return (
       <div id="map-id">
-       <Map center={position} zoom={13} maxZoom={20} id="map" >
+       <Map center={position} zoom={13} maxZoom={20} id="map">
        <ZoomControl  position="topright" />
         <TileLayer
         // url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'

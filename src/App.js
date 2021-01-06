@@ -3,6 +3,7 @@ import "./App.css";
 import LeafletMap from "./components/LeafletMap";
 
 class App extends Component {
+
   render() {
     return (
       <div id="container">
